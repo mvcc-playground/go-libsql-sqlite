@@ -1,4 +1,4 @@
-GROK resolvel
+GROK resolveu
 
 Sim, o erro de "duplicate symbols" ocorre porque você está usando o pacote `github.com/tursodatabase/go-libsql` (que requer cgo e embute o código C do SQLite) junto com o driver oficial do GORM para SQLite (`gorm.io/driver/sqlite`), que internamente importa `github.com/mattn/go-sqlite3` (também com cgo e SQLite embutido). Isso causa conflito de símbolos duplicados no linker, pois ambos incluem as mesmas funções do SQLite (como `_sqlite3_vsnprintf`, etc.).
 
